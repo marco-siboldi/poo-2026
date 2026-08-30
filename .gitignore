@@ -1,0 +1,34 @@
+### IntelliJ IDEA - artefactos de compilacion ###
+out/
+*.class
+*.iml.bak
+
+### IntelliJ IDEA - estado local del IDE (NO versionar) ###
+.idea/workspace.xml
+.idea/usage.statistics.xml
+.idea/shelf/
+.idea/tasks.xml
+.idea/dictionaries/
+.idea/httpRequests/
+.idea/contentModel.xml
+
+# El resto de .idea/ (modules.xml, misc.xml, vcs.xml) y poo-2026.iml SI van al
+# repositorio: son los que hacen que el proyecto abra bien en otra maquina.
+
+### Notas personales - nunca al remoto ###
+*.local.md
+
+### Eclipse ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+bin/
+
+### VS Code ###
+.vscode/
+
+### Linux / Mac ###
+.DS_Store
+*~
