@@ -4,7 +4,7 @@ public class Playlist {
     private NodoCancion primeraCancion;
     private NodoCancion ultimaCancion;
     private int numeroCanciones;
-    private double duracionTotal;
+    private int duracionTotal;
     private final String nombre;
 
     public Playlist(String nombre) {
@@ -54,7 +54,7 @@ public class Playlist {
         return numeroCanciones == 0;
     }
 
-    public double obtenerDuracionTotal() {
+    public int obtenerDuracionTotal() {
         return duracionTotal;
     }
 

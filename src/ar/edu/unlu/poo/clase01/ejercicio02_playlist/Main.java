@@ -24,15 +24,15 @@ public class Main {
         System.out.println("Cantidad de canciones en la playlist: " + unaPlaylist.getCantidadCanciones());
 
         Cancion primeraReproducida = unaPlaylist.reproducirSiguiente();
-        System.out.println("Cancion reproducida: " + primeraReproducida.getNombre()
+        System.out.println("Cancion reproducida: " + primeraReproducida.getTitulo()
                 + " | quedan: " + unaPlaylist.getCantidadCanciones()
                 + " | duración: " + unaPlaylist.obtenerDuracionTotal());
 
         Cancion segundaReproducida = unaPlaylist.reproducirSiguiente();
-        System.out.println("Cancion reproducida: " + segundaReproducida.getNombre());
+        System.out.println("Cancion reproducida: " + segundaReproducida.getTitulo());
 
         Cancion terceraReproducida = unaPlaylist.reproducirSiguiente();
-        System.out.println("Cancion reproducida: " + terceraReproducida.getNombre());
+        System.out.println("Cancion reproducida: " + terceraReproducida.getTitulo());
 
         System.out.println("Al final -> vacía: " + unaPlaylist.estaVacia()
                 + " | canciones: " + unaPlaylist.getCantidadCanciones()

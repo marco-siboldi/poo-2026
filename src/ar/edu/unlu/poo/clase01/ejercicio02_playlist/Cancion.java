@@ -1,27 +1,27 @@
 package ar.edu.unlu.poo.clase01.ejercicio02_playlist;
 
 public class Cancion {
-    private String nombre;
+    private String titulo;
     private String artista;
-    private double duracion;
+    private int duracion;
 
-    public Cancion(String nombre, String artista, double duracion) {
+    public Cancion(String titulo, String artista, int duracion) {
         if (duracion <= 0) {
             throw new DuracionInvalidaException("La duración debe ser mayor a cero.");
         }
-        this.nombre = nombre;
+        this.titulo = titulo;
         this.artista = artista;
         this.duracion = duracion;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getTitulo() {
+        return titulo;
     }
 
     public String getArtista() {
         return artista;
     }
-    public double getDuracion() {
+    public int getDuracion() {
         return duracion;
     }
 
