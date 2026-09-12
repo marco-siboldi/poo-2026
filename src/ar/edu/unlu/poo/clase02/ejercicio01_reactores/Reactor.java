@@ -17,7 +17,7 @@ public class Reactor {
 
     public static void setTemperaturaMaxima(Double temperaturaMaxima){
         if(temperaturaMaxima == null){
-            throw new NullPointerException("Temperatura maxima no puede ser null");
+            throw new IllegalArgumentException("Temperatura máxima no puede ser nula.");
         }
         Reactor.temperaturaMaxima = temperaturaMaxima;
     }
@@ -27,7 +27,7 @@ public class Reactor {
 
     public void actualizarTemperatura(Double temperatura){
         if(temperatura == null){
-            throw new IllegalArgumentException("Temperatura no puede ser nulo");
+            throw new IllegalArgumentException("Temperatura no puede ser nula.");
         }
         this.temperaturaActual = temperatura;
         if(temperatura > temperaturaMaxima){

@@ -14,7 +14,7 @@ public class TableroControl {
 
     public void agregarReactor(Reactor reactor) {
         if(reactor == null){
-            throw new  NullPointerException("Reactor no puede ser nulo.");
+            throw new IllegalArgumentException("Reactor no puede ser nulo.");
         }
         this.reactores.add(reactor);
     }
