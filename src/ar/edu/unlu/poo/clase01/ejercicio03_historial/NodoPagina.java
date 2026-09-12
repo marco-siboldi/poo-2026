@@ -2,7 +2,7 @@ package ar.edu.unlu.poo.clase01.ejercicio03_historial;
 
 class NodoPagina {
     private PaginaWeb pagina;
-    private NodoPagina paginaAnterior = null;
+    private NodoPagina paginaAnterior;
 
     public  NodoPagina(PaginaWeb pagina,  NodoPagina paginaAnterior) {
         this.paginaAnterior = paginaAnterior;
