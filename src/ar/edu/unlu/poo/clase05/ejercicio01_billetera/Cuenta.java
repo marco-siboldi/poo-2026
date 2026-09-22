@@ -4,7 +4,7 @@ public class Cuenta {
     private final String divisa;
     private double saldo;
     public Cuenta(String divisa) {
-        this.divisa = divisa;
+        this.divisa = divisa.toUpperCase().strip();
         this.saldo = 0.0;
     }
 

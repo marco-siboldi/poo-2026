@@ -21,7 +21,7 @@ public class BilleteraTest {
         assertEquals(0.0, billetera.getSaldo("ARS"));
 
         assertThrows(IllegalArgumentException.class, () -> billetera.abrirCuenta(""));
-
+        assertThrows(IllegalArgumentException.class, () -> billetera.abrirCuenta("   "));
     }
 
     @Test
@@ -41,6 +41,28 @@ public class BilleteraTest {
     @Test
     public void testOperacionesEnCuentasNoRegistradas() {
         assertThrows(IllegalArgumentException.class, () -> billetera.depositar("EUR", 1000.0));
+        assertThrows(IllegalArgumentException.class, () -> billetera.extraer("USD", 1000.0));
+        assertThrows(IllegalArgumentException.class, () -> billetera.getSaldo("EUR"));
+    }
+
+    @Test
+    public void testCuentaDuplicada_insensibleAMayusculasYEspacios() {
+        assertThrows(CuentaDuplicadaException.class, () -> billetera.abrirCuenta("Ars"));
+        assertThrows(CuentaDuplicadaException.class, () -> billetera.abrirCuenta(" arS "));
+    }
+
+    @Test
+    public void testDivisaNormalizada_operacionesConCualquierGrafia() {
+        billetera.abrirCuenta(" usd ");
+        billetera.depositar("USD", 1000.0);
+        assertEquals(1000.0, billetera.getSaldo("usd"));
+    }
+
+    @Test
+    public void testDivisaNormalizada_operacionesConCualquierGrafia2() {
+        billetera.abrirCuenta("usd ");
+        billetera.depositar("USD", 1000.0);
+        assertEquals(1000.0, billetera.getSaldo("usd"));
     }
 
 

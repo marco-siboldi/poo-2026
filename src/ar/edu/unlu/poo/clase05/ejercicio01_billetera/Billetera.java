@@ -11,8 +11,8 @@ public class Billetera {
     }
 
     public void abrirCuenta(String divisa) {
-        if (divisa == null || divisa.isEmpty()) {
-            throw new IllegalArgumentException("La divisa no puede ser nulo");
+        if (divisa == null || divisa.isBlank()) {
+            throw new IllegalArgumentException("La divisa no puede ser nulo o vacía.");
         }
         if (buscarCuenta(divisa).isPresent()) {
             throw new CuentaDuplicadaException("La cuenta con esa divisa ya existe.");
@@ -32,9 +32,9 @@ public class Billetera {
             }
         }
         return null;
-*/
+*/      String divisaNormalizada = divisa.toUpperCase().strip();
         return cuentas.stream()
-                .filter(c -> c.getDivisa().equals(divisa))
+                .filter(c -> c.getDivisa().equals(divisaNormalizada))
                 .findFirst();
     }
 
