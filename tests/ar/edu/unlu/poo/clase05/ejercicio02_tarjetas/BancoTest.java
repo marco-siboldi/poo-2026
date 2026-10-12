@@ -34,4 +34,13 @@ public class BancoTest {
         assertEquals("Marco", banco.buscarCliente("40543765").getNombre());
     }
 
+    @Test
+    public void testAsociarTarjetaACliente (){
+        banco.registrarCliente("40543765", "Marco");
+        banco.asociarTarjeta("40543765", "1234-2345-3456-4567");
+        Cliente buscar = banco.buscarCliente("40543765");
+        assertEquals(1, buscar.getTarjetas().size());
+        assertEquals("1234-2345-3456-4567", buscar.getTarjetas().getFirst().getNumero());
+    }
+
 }

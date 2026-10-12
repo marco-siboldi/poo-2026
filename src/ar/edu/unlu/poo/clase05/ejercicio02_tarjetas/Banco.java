@@ -28,4 +28,10 @@ public class Banco {
     private Optional<Cliente> buscarPorDni(String dni) {
         return clientes.stream().filter(cliente -> cliente.getDni().equals(dni)).findFirst();
     }
+
+    public void asociarTarjeta(String dni, String numeroTarjeta) {
+        Cliente c = buscarCliente(dni);
+        Tarjeta tarjeta = new Tarjeta(numeroTarjeta);
+        c.agregarTarjeta(tarjeta);
+    }
 }
