@@ -27,4 +27,11 @@ public class BancoTest {
         assertThrows(IllegalArgumentException.class, () -> banco.buscarCliente("40543743"));
     }
 
+    @Test
+    public void testClienteDuplicadoPorDni(){
+        banco.registrarCliente("40543765", "Marco");
+        assertThrows(ClienteDuplicadoException.class, () -> banco.registrarCliente("40543765", "Juan"));
+        assertEquals("Marco", banco.buscarCliente("40543765").getNombre());
+    }
+
 }

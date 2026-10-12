@@ -2,6 +2,7 @@ package ar.edu.unlu.poo.clase05.ejercicio02_tarjetas;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class Banco {
     private final List<Cliente> clientes;
@@ -10,17 +11,21 @@ public class Banco {
     }
 
     public void registrarCliente(String dni, String nombre) {
+        if(buscarPorDni(dni).isPresent()){
+            throw new ClienteDuplicadoException("Ya existe un cliente con el dni: " + dni);
+        }
         Cliente cliente = new Cliente(dni, nombre);
         this.clientes.add(cliente);
     }
 
     public Cliente buscarCliente(String dni) {
-        for (Cliente cliente : this.clientes) {
-            if (cliente.getDni().equals(dni)) {
-                return cliente;
-            }
-        }
-        throw new IllegalArgumentException("No se encontro el cliente");
+        return buscarPorDni(dni)
+                .orElseThrow(() -> new IllegalArgumentException("No se encontro el cliente"));
     }
 
+
+
+    private Optional<Cliente> buscarPorDni(String dni) {
+        return clientes.stream().filter(cliente -> cliente.getDni().equals(dni)).findFirst();
+    }
 }
