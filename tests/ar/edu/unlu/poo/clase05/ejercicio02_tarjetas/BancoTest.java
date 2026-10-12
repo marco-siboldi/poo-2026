@@ -43,4 +43,12 @@ public class BancoTest {
         assertEquals("1234-2345-3456-4567", buscar.getTarjetas().getFirst().getNumero());
     }
 
+
+    @Test
+    public void testAsociarTarjetaACliente_inexistente(){
+        banco.registrarCliente("40543765", "Marco");
+        assertThrows(IllegalArgumentException.class, () -> banco.asociarTarjeta("40543712", "1234-2345-3456-4567"));
+    }
+
+
 }

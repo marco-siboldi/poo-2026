@@ -23,8 +23,6 @@ public class Banco {
                 .orElseThrow(() -> new IllegalArgumentException("No se encontro el cliente"));
     }
 
-
-
     private Optional<Cliente> buscarPorDni(String dni) {
         return clientes.stream().filter(cliente -> cliente.getDni().equals(dni)).findFirst();
     }
