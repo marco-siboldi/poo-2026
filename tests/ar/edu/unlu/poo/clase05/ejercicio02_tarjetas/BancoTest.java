@@ -51,4 +51,26 @@ public class BancoTest {
     }
 
 
+    @Test
+    public void testAsociarTarjetaYaRegistrada_otroCliente(){
+        banco.registrarCliente("40543765", "Marco");
+        banco.registrarCliente("12345678", "Juan");
+        banco.asociarTarjeta("40543765", "1234-2345-3456-4567");
+        assertThrows(TarjetaDuplicadaException.class, () -> banco.asociarTarjeta("12345678", "1234-2345-3456-4567"));
+        Cliente buscar = banco.buscarCliente("12345678");
+        Cliente buscar2 = banco.buscarCliente("40543765");
+        assertEquals(0, buscar.getTarjetas().size());
+        assertEquals(1, buscar2.getTarjetas().size());
+    }
+
+    @Test
+    public void testAsociarTarjetaYaRegistrada_mismoCliente(){
+        banco.registrarCliente("40543765", "Marco");
+        banco.asociarTarjeta("40543765", "1234-2345-3456-4567");
+        assertThrows(TarjetaDuplicadaException.class, () -> banco.asociarTarjeta("40543765", "1234-2345-3456-4567"));
+        Cliente buscar = banco.buscarCliente("40543765");
+        assertEquals(1, buscar.getTarjetas().size());
+    }
+
+
 }

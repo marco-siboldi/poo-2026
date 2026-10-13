@@ -29,7 +29,16 @@ public class Banco {
 
     public void asociarTarjeta(String dni, String numeroTarjeta) {
         Cliente c = buscarCliente(dni);
+        if (existeTarjeta(numeroTarjeta)) {
+            throw new TarjetaDuplicadaException("La tarjeta " + numeroTarjeta + " ya existe en el sistema");
+        }
         Tarjeta tarjeta = new Tarjeta(numeroTarjeta);
         c.agregarTarjeta(tarjeta);
+    }
+
+    private boolean existeTarjeta(String numeroTarjeta) {
+        return clientes.stream()
+                .flatMap(cliente -> cliente.getTarjetas().stream())
+                .anyMatch(tarjeta -> tarjeta.getNumero().equals(numeroTarjeta));
     }
 }
