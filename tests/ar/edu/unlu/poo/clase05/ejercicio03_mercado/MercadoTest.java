@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class MercadoTest {
-    Mercado mercado;
+    private Mercado mercado;
 
     @BeforeEach
     public void setUp() {
@@ -15,7 +15,7 @@ public class MercadoTest {
     }
 
     @Test
-    public void testRegistrarMercado() {
+    public void testRegistrarCotizacion() {
         mercado.actualizarCotizacion("ARS", 100.0);
         assertEquals(100.0, mercado.getCotizacion("ARS"));
     }
@@ -37,6 +37,13 @@ public class MercadoTest {
         assertThrows(IllegalArgumentException.class, () -> mercado.actualizarCotizacion("ARS", -100.0));
         assertEquals(100.0, mercado.getCotizacion("ARS"));
 
+    }
+
+    @Test
+    public void testGetCotizacionDivisaNoCotizadaLanzaExcepcion(){
+        mercado.actualizarCotizacion("ARS", 100.0);
+        mercado.actualizarCotizacion("EUR", 20.0);
+        assertThrows(CotizacionNoEncontradaException.class, () -> mercado.getCotizacion("YEN"));
     }
 
 }

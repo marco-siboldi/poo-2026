@@ -18,6 +18,9 @@ public class Mercado {
     }
 
     public double getCotizacion(String divisa) {
+        if(!this.cotizaciones.containsKey(divisa)){
+            throw new CotizacionNoEncontradaException("No se encontró cotización para la divisa: " + divisa);
+        }
         return this.cotizaciones.get(divisa);
     }
 }
