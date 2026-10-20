@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class PortafolioTest {
     private Portafolio portafolio;
@@ -34,5 +35,18 @@ public class PortafolioTest {
         assertEquals(0.0, portafolio.getPosicion("ARS"));
         assertEquals(0.0, portafolio.getPosicion("USD"));
 
+    }
+
+    @Test
+    public void testRecibirMercadoNulo() {
+        assertThrows(IllegalArgumentException.class, () -> new Portafolio(null));
+    }
+
+    @Test
+    public void testPosicionesInvalidasMenoresOIgualesACero() {
+        portafolio.agregarPosicion("ARS", 150.0);
+        assertThrows(IllegalArgumentException.class, () -> portafolio.agregarPosicion("ARS", -100.0));
+        assertThrows(IllegalArgumentException.class, () -> portafolio.agregarPosicion("ARS", 0.0));
+        assertEquals(150.0, portafolio.getPosicion("ARS"));
     }
 }
