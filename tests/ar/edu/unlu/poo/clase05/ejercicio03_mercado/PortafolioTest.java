@@ -8,10 +8,11 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class PortafolioTest {
     private Portafolio portafolio;
+    private Mercado mercado;
 
     @BeforeEach
     public void setUp() {
-        Mercado  mercado = new Mercado();
+        mercado = new Mercado();
         portafolio = new Portafolio(mercado);
     }
 
@@ -49,4 +50,14 @@ public class PortafolioTest {
         assertThrows(IllegalArgumentException.class, () -> portafolio.agregarPosicion("ARS", 0.0));
         assertEquals(150.0, portafolio.getPosicion("ARS"));
     }
+
+    @Test
+    public void testCalcularValorTotalEnUSD() {
+        mercado.actualizarCotizacion("EUR", 1.1);
+        mercado.actualizarCotizacion("ARS", 0.001);
+        portafolio.agregarPosicion("EUR", 100.0);
+        portafolio.agregarPosicion("ARS", 10000.0);
+        assertEquals(120.0, portafolio.calcularValorTotalUSD(), 0.01);
+    }
+
 }

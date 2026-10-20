@@ -9,7 +9,7 @@ public class Portafolio {
     private final Map<String, Double> posiciones;
 
     public Portafolio(Mercado mercado) {
-        if(mercado == null){
+        if (mercado == null) {
             throw new IllegalArgumentException("El mercado no puede ser nulo.");
         }
         this.mercado = mercado;
@@ -17,7 +17,7 @@ public class Portafolio {
     }
 
     public void agregarPosicion(String divisa, double cantidad) {
-        if(cantidad <= 0){
+        if (cantidad <= 0) {
             throw new IllegalArgumentException("La cantidad debe ser mayor a 0.");
         }
         this.posiciones.put(divisa, cantidad + getPosicion(divisa));
@@ -25,5 +25,11 @@ public class Portafolio {
 
     public double getPosicion(String divisa) {
         return this.posiciones.getOrDefault(divisa, 0.0);
+    }
+
+    public double calcularValorTotalUSD() {
+        return posiciones.keySet().stream()
+                .mapToDouble(divisa -> getPosicion(divisa) * mercado.getCotizacion(divisa))
+                .sum();
     }
 }
