@@ -60,4 +60,22 @@ public class PortafolioTest {
         assertEquals(120.0, portafolio.calcularValorTotalUSD(), 0.01);
     }
 
+    @Test
+    public void testValorTotalReflejaCambioDeCotizacionEnMercado() {
+        portafolio.agregarPosicion("ARS", 10000.0);
+        mercado.actualizarCotizacion("ARS", 0.001);
+        assertEquals(10.0, portafolio.calcularValorTotalUSD(), 0.01);
+        mercado.actualizarCotizacion("ARS", 0.0001);
+        assertEquals(1.0, portafolio.calcularValorTotalUSD(), 0.01);
+    }
+
+    @Test
+    public void testCalcularTotalConDivisaNoCotizada() {
+        portafolio.agregarPosicion("ARS", 10000.0);
+        portafolio.agregarPosicion("JPY", 20000.0);
+        mercado.actualizarCotizacion("JPY", 0.1038);
+        assertThrows(CotizacionNoEncontradaException.class , () -> portafolio.calcularValorTotalUSD());
+
+    }
+
 }
